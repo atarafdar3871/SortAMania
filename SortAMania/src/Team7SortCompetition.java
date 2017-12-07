@@ -46,7 +46,7 @@ public class Team7SortCompetition extends SortCompetition
 		System.out.println("Final run time " + finalTime + "\nThe Median Value is " + median);
 		
 	}
-	public static int challengeOne(int[] arr)
+	public int challengeOne(int[] arr)
 	{
 		quickSort(arr,0,arr.length - 1);
 		if(arr.length%2 == 0)
@@ -62,7 +62,7 @@ public class Team7SortCompetition extends SortCompetition
 		return 0;
 		
 	}
-	public static int challengeThree(int[] arr)
+	public int challengeThree(int[] arr)
 	{
 		insertionSort(arr);
 		if(arr.length%2 == 0)
@@ -72,7 +72,7 @@ public class Team7SortCompetition extends SortCompetition
 		return arr[arr.length/2];
 		
 	}
-	public static int challengeFour(int[][] arr)
+	public int challengeFour(int[][] arr)
 	{
 		int[] medianArr = new int [arr[0].length]; //array to add the medians in
 		int median = 0; //median of the sub array
