@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class Team14SortingCompetition extends SortCompetition {
 
 	public static void main(String[]args) {
+		Team14SortingCompetition bot = new Team14SortingCompetition();
 		int[] list = new int[10000];
 		int[][] list2 = new int[1000][1000];
 		generateNum(list2);
@@ -12,13 +13,14 @@ public class Team14SortingCompetition extends SortCompetition {
 		//printIntArray(list);
 		//System.out.println(ChallangeOne(list));
 		//System.out.println(Arrays.deepToString(list2));
+		System.out.println(bot.challengeFour(list2));
 	}
 	public int challengeOne(int[] arr) {
 		//bubbleSort(list);
 		if(arr.length % 2 == 1) {
 			return arr[arr.length/2];
 		}
-		return (arr[arr.length/2] + arr[(arr.length/2)-1])/2;
+		return median(arr);
 	}
 	public int challengeTwo(String[] arr, String query) {
 	{
@@ -40,16 +42,21 @@ public class Team14SortingCompetition extends SortCompetition {
 	}
 	
 	public int challengeFour(int[][] arr) {
+		int[] arr2 = new int[1000];
 		for(int i = 0; i < arr.length; i++) {
-			for(int j = 0; j < arr[i].length; j++) {
-				
-			}
+			bubbleSort(arr[i]);
+			arr2[i] = median(arr[i]);
 		}
+			bubbleSort(arr2);
+			return(median(arr2));
 	}
 	
+	
 	public int challengeFive(Comparable[] arr, Comparable query) {
-		// TODO Auto-generated method stub
-		return 0;
+		bubbleSort(arr);
+		for(int i = 0; i < arr.length; i++) {
+			
+		}
 	}
 	
 	public static void bubbleSort(int[]list1) {
@@ -103,6 +110,13 @@ public class Team14SortingCompetition extends SortCompetition {
 	public String greeting() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public static int median(int[]arr) {
+		if(arr.length % 2 == 1) {
+			return arr[arr.length/2];
+		}
+		return(arr[arr.length/2] + arr[(arr.length/2)-1])/2;
 	}
 }
 
