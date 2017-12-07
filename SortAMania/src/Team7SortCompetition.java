@@ -14,7 +14,15 @@ public class Team7SortCompetition extends SortCompetition
 	public int challengeTwo(String[] arr, String query)
 	{
 		
-		return 0;
+		bubbleSort(arr);
+		for(int i = 0; i < arr.length; i++)
+		{
+			if(arr[i].equals(query))
+			{
+				return i;
+			}
+		}
+		return -1;
 		
 	}
 	public int challengeThree(int[] arr)
@@ -148,6 +156,25 @@ public class Team7SortCompetition extends SortCompetition
 			System.out.print("[" + arr[i] + "]");
 		}
 		System.out.println();
+	}
+	public static void swap(String[] arr, int i, int j)
+	{
+		String temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+	public static void bubbleSort(String[] list) {
+		boolean sorted = false;
+		while(!sorted){
+			sorted = true;
+			for(int i = 0; i < list.length-1; i++) {
+				if(list[i].compareTo(list[i+1])>0)
+				{
+					swap(list, i, i + 1);
+					sorted = false;
+				}
+			}
+		}
 	}
 	@Override
 	public String greeting() {
