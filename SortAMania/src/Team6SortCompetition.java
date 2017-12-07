@@ -73,12 +73,13 @@ public class Team6SortCompetition extends SortCompetition{
 
 //Start challengeFive
 	public int challengeFive(Comparable[] arr, Comparable query) {
-		// TODO Auto-generated method stub
-		return 0;
+		for(int i = 0; i<arr.length; i++) {
+			if(arr[i].equals(query)) return i;
+		}
+		return -1;
 	}
-//Eng challengeFive
+//End challengeFive
 
-	@Override
 	public String greeting() {
 		return "Hello, and welcome to Team 6's Sorting Competition entry! Team 6 is made up of Nick Ragovski and Anis Tarfdar.";
 	}
