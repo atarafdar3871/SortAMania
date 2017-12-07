@@ -149,5 +149,10 @@ public class Team7SortCompetition extends SortCompetition
 		}
 		System.out.println();
 	}
+	@Override
+	public String greeting() {
+		// TODO Auto-generated method stub
+		return null;
+	}
  
 }
