@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 /*
 *	Authors: Amir Hasan & Justin Fagan
@@ -294,6 +295,16 @@ public class Team13SortCompetition extends SortCompetition
 		}
 		return (int)(Math.random()*(high-(low-1))+low);
 	}
+    private static String generateRandomString() {
+    	String aToZ="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random rand=new Random();
+        StringBuilder res=new StringBuilder();
+        for (int i = 0; i < 17; i++) {
+           int randIndex=rand.nextInt(aToZ.length()); 
+           res.append(aToZ.charAt(randIndex));            
+        }
+        return res.toString();
+    }
     private static int[] generateRandomIntArray(int size)
 	{
 		int[] randomArray= new int[size];
@@ -303,4 +314,13 @@ public class Team13SortCompetition extends SortCompetition
 		}
 		return randomArray;
 	}
+	private static String[] generateStringArray(int size) {
+        String[]randomArray=new String[size];
+        for(int i=0;i<randomArray.length;i++)
+        {
+        	randomArray[i]=generateRandomString();
+        }
+        return randomArray;
+    }
+    
 }
