@@ -1,51 +1,6 @@
 
 public class Team7SortCompetition extends SortCompetition
 {
-	public static void main(String args[]) 
-	{
-		int runAmount = 5;
-		long temp5 = 0;
-		for(int i = 0; i < runAmount; i++)
-		{
-			//int[] arr1 = {5,1,8,3,9,4,2};
-			int[] arr1 = new int[10000];
-			String[] arr2 = {"Sidney","Ahnaf","Jason","Ivy","Jaron"};
-			for(int j = 0; j < 10000; j++)
-			{
-				arr1[j] = (int)Math.floor(Math.random()*10000);
-			}
-			
-			long temp4 = System.nanoTime();
-			challengeOne(arr1);
-			//printArray2(arr1);
-			//System.out.println(challengeOne(arr1));
-			//challengeThree(arr1);
-			temp4 = System.nanoTime() - temp4;
-			temp5+= temp4;
-			double milli = (double) temp4/(1000000);
-			System.out.println(milli);
-		}
-		//System.out.println(temp5/runAmount);
-		//1 
-		int[][] array = new int [1000][1000];
-		for(int i=0; i<1000; i++)
-		{
-			for(int j=0; j<1000; j++)
-			{
-				int random = (int) (Math.random()*10000);
-				array[i][j] = random;
-			}
-		}
-		int median = 0;
-		
-		double startTime = System.nanoTime();
-		median = challengeFour(array);
-		double endTime = System.nanoTime();
-		double finalTime = endTime - startTime;
-		
-		System.out.println("Final run time " + finalTime + "\nThe Median Value is " + median);
-		
-	}
 	public int challengeOne(int[] arr)
 	{
 		quickSort(arr,0,arr.length - 1);
