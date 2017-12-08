@@ -93,9 +93,9 @@ public class Team6SortCompetition extends SortCompetition{
 		int[] medianArray = new int[arr.length];
 		for(int i = 0; i<arr.length; i++) {
 			medianArray[i] = sortAndFindMedian(arr[i]);
-			System.out.print(medianArray[i] + " ");
+			//System.out.print(medianArray[i] + " ");
 		}
-		System.out.println();
+		//System.out.println();
 		return sortAndFindMedian(medianArray);
 	}
 	

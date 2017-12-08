@@ -1,10 +1,10 @@
 
 import java.util.Random;
 import java.util.Arrays;
-public class Team14SortingCompetition extends SortCompetition {
+public class Team14SortCompetition extends SortCompetition {
 
 	public static void main(String[]args) {
-		Team14SortingCompetition bot = new Team14SortingCompetition();
+		Team14SortCompetition bot = new Team14SortCompetition();
 		int[] list = new int[10000];
 		int[][] list2 = new int[1000][1000];
 		generateNum(list2);

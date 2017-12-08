@@ -5,7 +5,7 @@
  */
 import java.util.Arrays;
 
-public class Team5 extends SortCompetition{
+public class Team5SortCompetition extends SortCompetition{
 
 	public static void main(String[] args) {
 /*		System.out.println("Challenge 1:");
@@ -118,13 +118,13 @@ public class Team5 extends SortCompetition{
 		}
 		bubbleSort(medianArr, medianArrPos);
 		
-		System.out.println("Median Array Sorted: ");
+		//System.out.println("Median Array Sorted: ");
 		for (int z = 0; z < medianArrPos.length; z++) {
-			System.out.print(medianArr[z]+ " ");
+			//System.out.print(medianArr[z]+ " ");
 		}
-		System.out.println("Median Array Positions:");
+		//System.out.println("Median Array Positions:");
 		for (int z = 0; z < medianArrPos.length; z++) {
-			System.out.print(medianArrPos[z]+ " ");
+			//System.out.print(medianArrPos[z]+ " ");
 		}
 		for(int i = 0; i < medianArrPos.length; i++)
 		{
