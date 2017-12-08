@@ -35,32 +35,79 @@ public class Team7SortCompetition extends SortCompetition
 		return arr[arr.length/2];
 		
 	}
-	public int challengeFour(int[][] arr)
-	{
-		int[] medianArr = new int [arr[0].length]; //array to add the medians in
-		int median = 0; //median of the sub array
-		
-		for(int i=0; i< arr[0].length; i++)
-		{
-			quickSort(arr[i], 0, arr.length-1); //sorts all sub arrays into ascending order
-			for(int j=0; j<arr[i].length; j++) //loops through each sub array
-			{
-				median = (arr[j][499] + arr[j][500])/2; //finds the median of the sub array
-				medianArr[i] = median; // adds the median to the array
-			}
-		}
-		
-		quickSort(medianArr, 0, medianArr.length-1); // sorts all the medians in the median array in ascending order
-		
-		median = (medianArr[499] + medianArr[500])/2; // finds the median of the median array
-		
-		return median;
-		
-	} 
 	public int challengeFive(Comparable[] arr, Comparable query)
 	{
-		return 0;
-		
+		insertionSort(arr);
+		for (int i = 0; i < arr.length; i++)
+		{
+			if (arr[i].compareTo(query)==0)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	public static int indexOfMin(int first, int[] list1)
+	{
+		int temp = list1[first];
+		int index = first;
+		for(int i  = first; i < list1.length; i++)
+		{
+			if(temp > list1[i]) {
+				temp = list1[i];
+				index = i;
+			}
+		}
+		return index;
+	}
+	public static int indexOfMinMedian(int first, int[][] list1)
+	{
+		int temp = list1[first][500];
+		int index = first;
+		for(int i  = first; i < list1.length; i++)
+		{
+			if(temp > list1[i][500]) {
+				temp = list1[i][500];
+				index = i;
+			}
+		}
+		return index;
+	}
+	public static void selectionSort(int[] list1) {
+		for(int i = 0; i < list1.length; i++)
+		{
+			swap(list1, i, indexOfMin(i, list1));
+		}
+	}
+	public static void selectionSortDeux(int[][] list1) {
+		for(int i = 0; i < list1.length; i++)
+		{
+			swap(list1, i, indexOfMinMedian(i, list1));
+		}
+	}
+	public int challengeFour(int[][] arr)
+	{
+		for(int i=0; i< arr.length; i++)
+		{
+			selectionSort(arr[i]); //sorts all sub arrays into ascending order
+		}
+		for(int i=0; i<arr.length;i++)
+		{
+			selectionSortDeux(arr);
+		}
+		return arr[500][500];
+	}
+	public static void swap(int[] arr, int i, int j)
+	{
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+	public static void swap(int[][] arr, int i, int j)
+	{
+		int[] temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
 	}
 	public static void insertionSort(int[] list1)
 	{
@@ -80,6 +127,31 @@ public class Team7SortCompetition extends SortCompetition
 				}
 			}
 		}
+	}
+	public static void insertionSort(Comparable[] list1)
+	{
+		int index = 0;
+		for (int i = 0; i < list1.length - 1; i++)
+		{
+			if (list1[i].compareTo(list1[i + 1]) > 0)
+			{
+				index = i + 1;
+				for (int j = i; j > -1; j--)
+				{
+					if (list1[index].compareTo(list1[j])<0)
+					{
+						swap(list1, index, j);
+						index = j;
+					}
+				}
+			}
+		}
+	}
+	public static void swap(Comparable[] arr, int i, int j)
+	{
+		Comparable temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
 	}
 	public static int partition(int[] list1,int front,int back ){ 
 		int pivot = (front+back)/2;
@@ -142,21 +214,6 @@ public class Team7SortCompetition extends SortCompetition
 			}
 		}
 	}
-	public static void swap(int[] arr, int i, int j)
-	{
-		int temp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = temp;
-	}
-	public static void printArray2(int[] arr)
-	
-	{
-		for(int i = 0; i < arr.length; i++)
-		{
-			System.out.print("[" + arr[i] + "]");
-		}
-		System.out.println();
-	}
 	public static void swap(String[] arr, int i, int j)
 	{
 		String temp = arr[i];
@@ -179,7 +236,6 @@ public class Team7SortCompetition extends SortCompetition
 	@Override
 	public String greeting() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Never forget greetings; they are important. Programmers were Ahnaf Zitou, Jason Zhang, and Sidney Phillips";
 	}
- 
 }
