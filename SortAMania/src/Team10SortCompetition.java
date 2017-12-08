@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Team10SortCompetition{
+public class Team10SortCompetition extends SortCompetition{
 	public static void main(String[] args)
 	{
 	/*
@@ -15,7 +15,7 @@ public class Team10SortCompetition{
 		long startTimeOne = System.nanoTime();
 		int medianOne = challengeOne(testOne);
 		long endTimeOne = System.nanoTime();
-		long timeOne = endTimeOne-startTimeOne;
+		long timeOne = (endTimeOne-startTimeOne)/1000000;
 		for (int x : testOne)
 		{
 			System.out.print("["+x+"]");
@@ -23,7 +23,8 @@ public class Team10SortCompetition{
 		System.out.println();
 		System.out.println("Time in nanoseconds: "+timeOne);
 		System.out.println("Median is "+medianOne);
-		
+	*/
+	/*
 		//CHALLENGE TWO
 		System.out.println("CHALLENGE TWO");
 		String[] testTwo = new String[10000];
@@ -51,7 +52,8 @@ public class Team10SortCompetition{
 		System.out.println();
 		System.out.println("Time in nanoseconds: "+timeTwo);
 		System.out.println("Found at "+medianTwo);
-	
+	*/
+	/*
 		//CHALLENGE THREE
 		System.out.println("CHALLENGE THREE");
 		int[] testThree = new int[10000];
@@ -62,7 +64,7 @@ public class Team10SortCompetition{
 		long startTimeThree = System.nanoTime();
 		int medianThree = challengeThree(testThree);
 		long endTimeThree = System.nanoTime();
-		long timeThree = endTimeThree-startTimeThree;
+		long timeThree = (endTimeThree-startTimeThree)/1000000;
 		for(int x: testThree)
 		{
 			System.out.print("["+x+"]");
@@ -70,7 +72,8 @@ public class Team10SortCompetition{
 		System.out.println();
 		System.out.println("Time in nanoseconds: "+timeThree);
 		System.out.println("Median is "+medianThree);
-	
+	*/
+	/*
 		//CHALLENGE FOUR
 		System.out.println("CHALLENGE FOUR");
 		int[][] testFour = new int[1000][1000];
@@ -84,7 +87,7 @@ public class Team10SortCompetition{
 		long startTimeFour = System.nanoTime();
 		int medianFour = challengeFour(testFour);
 		long endTimeFour = System.nanoTime();
-		long timeFour = endTimeFour-startTimeFour;
+		long timeFour = (endTimeFour-startTimeFour)/1000000;
 		for(int[] x : testFour)
 		{
 			for(int y : x)
@@ -96,6 +99,7 @@ public class Team10SortCompetition{
 		System.out.println("Time in nanoseconds: "+timeFour);
 		System.out.println("Median is "+medianFour);
 	*/
+	/*
 		//CHALLENGE FIVE
 		System.out.println();
 		System.out.print("CHALLENGE FIVE");
@@ -111,11 +115,11 @@ public class Team10SortCompetition{
 			}
 			testFive[i] = s;
 		} 
-		System.out.println(testFive[0]);
+		
 		long startTimeFive = System.nanoTime();
 		int medianFive = challengeFive(testFive,testFive[0]);
 		long endTimeFive = System.nanoTime();
-		long totalTimeFive = endTimeFive-startTimeFive;
+		long totalTimeFive = (endTimeFive-startTimeFive)/1000000;
 		for (String x:testFive)
 		{
 			System.out.print("["+x+"]");
@@ -123,6 +127,7 @@ public class Team10SortCompetition{
 		System.out.println();
 		System.out.println("Total time is "+totalTimeFive);
 		System.out.println(medianFive);
+	*/
 	}
 	
 	public int challengeOne(int[] arr)
@@ -133,8 +138,8 @@ public class Team10SortCompetition{
 	
 	public int challengeTwo(String[] arr, String x)
 	{
-		bubbleSort(arr);
-		return containsString(arr,x);
+		insertionSort(arr);
+		return containsComparable(arr,x);
 	}
 	
 	public int challengeThree(int[] arr)
@@ -187,34 +192,79 @@ public class Team10SortCompetition{
 		return findMedian(medians);
 	}
 	
-	public static int challengeFive(Comparable[] arr, Comparable query)
+	public int challengeFive(Comparable[] arr, Comparable query)
 	{
-		bubbleSortComp(arr);
-		//quickSort(arr,0,arr.length-1);
+		insertionSort(arr);
 		return containsComparable(arr,query);
 	}
 	
-	
 	/*
-	 * Find Median
-	 * Finds the median of an array of integers.
-	 * @param double[] arr
-	 * @return double
+	 * Shell Sort
+	 * Sorts an array of integers by sorting pairs of elements far apart from each other, 
+	 * then progressively reducing the gap between elements to be compared.
+	 * @param int[] arr
+	 * @return void
 	 */
+	public static void shellSort(int[] arr)
+	{
+		int gap = (int) Math.floor(arr.length/2);
+		while (gap>=1)
+		{
+			for (int i=0; i<arr.length; i++)
+			{
+				int j=i;
+				while (j<arr.length)
+				{
+					if ((j+gap)<arr.length && arr[j]>arr[j+gap])
+					{
+							int dummy = arr[j+gap];
+							arr[j+gap] = arr[j];
+							arr[j]=dummy;
+							boolean done = false;
+							int h=j;
+							while(!done)
+							{
+								if ((h-gap)>=0 && arr[h]<arr[h-gap])
+								{
+									int dummy2 = arr[h-gap];
+									arr[h-gap] = arr[h];
+									arr[h]=dummy2;
+								}
+								else
+								{
+									done=true;
+								}
+							}
+					}
+						
+					j+=gap;
+				}
+			}
+			gap = (int)Math.floor(gap/2);
+		}
+	}
+		
+		/*
+		 * Find Median
+		 * Finds the median of an array of integers.
+		 * @param double[] arr
+		 * @return int
+		 */
 	public static int findMedian(double[] arr)
 	{
 		if (arr.length % 2==0)
 		{
-			return (int) ((arr[arr.length/2]+arr[(arr.length/2)-1])/2);
+			return (int)(arr[arr.length/2]+arr[(arr.length/2)-1])/2;
 		}
-		return (int) arr[(arr.length-1)/2];
+		return (int)arr[(arr.length-1)/2];
 	}
+	
 
 	/*
 	 * Find Median
 	 * Finds the median of an array of integers.
 	 * @param int[] arr
-	 * @return double
+	 * @return int
 	 */
 	public static int findMedian(int[] arr)
 	{
@@ -226,7 +276,7 @@ public class Team10SortCompetition{
 	}
 	
 	/*
-	 * Bubble Sort (integers)
+	 * Bubble Sort
 	 * Sorts an array of integers by swapping adjacent numbers when needed until there is no more
 	 * swaps needed.
 	 * @param int[] list1
@@ -255,6 +305,46 @@ public class Team10SortCompetition{
 				swapZero=true;
 			}
 		}
+	}
+	
+	/*
+	 * Insertion Sort 
+	 * Sorts an array of Comparable objects by taking each element from the array and adding it to the front of the array
+	 * in the correct order.
+	 * @param Comparable[] list1
+	 * @return void
+	 */
+	public static void insertionSort(Comparable[] list1)
+	{
+		for (int i=0; i<list1.length-1; i++)
+		{
+				if (list1[i].compareTo(list1[i+1])>0)
+				{
+					boolean foundPlace= false;
+					int j = i;
+					while(!foundPlace)
+					{
+						if(j==-1)
+						{
+							foundPlace=true;
+						}
+
+						else if(list1[j].compareTo(list1[i+1])<0)
+						{
+							foundPlace=true;
+						}
+
+						else
+						{
+							j--;
+						}
+					}
+					
+					Comparable dummy= list1[i+1];
+					moveOver(list1, j+1,i+1);
+					list1[j+1]= dummy;
+				}
+			}
 	}
 
 	
@@ -297,21 +387,40 @@ public class Team10SortCompetition{
 				}
 			}
 	}
-
+	
 	/*
 	 * Move Over function
 	 * Moves each item in the array over one position in the given interval.
-	 * @param int[][] array
+	 * @param int[] array
 	 * @param int x starting position of interval inclusive
 	 * @param int y ending position of interval inclusive
 	 * @return void
 	 */
-	public static void moveOver(int[][]array, int x, int z)
+	public static void moveOver(int[]array, int x, int z)
 	{
-		int[] nextNum= array[x];
+		int nextNum= array[x];
 		for(int y=x; y<z; y++)
 		{
-			int[] dummy = array[y+1];
+			int dummy = array[y+1];
+			array[y+1]= nextNum;
+			nextNum = dummy;
+		}
+	}
+	
+	/*
+	 * Move Over function
+	 * Moves each item in the array over one position in the given interval.
+	 * @param Comparable[] array
+	 * @param int x starting position of interval inclusive
+	 * @param int y ending position of interval inclusive
+	 * @return void
+	 */
+	public static void moveOver(Comparable[]array, int x, int z)
+	{
+		Comparable nextNum= array[x];
+		for(int y=x; y<z; y++)
+		{
+			Comparable dummy = array[y+1];
 			array[y+1]= nextNum;
 			nextNum = dummy;
 		}
@@ -339,190 +448,43 @@ public class Team10SortCompetition{
 	/*
 	 * Move Over function
 	 * Moves each item in the array over one position in the given interval.
-	 * @param int[] array
+	 * @param int[][] array
 	 * @param int x starting position of interval inclusive
 	 * @param int y ending position of interval inclusive
 	 * @return void
 	 */
-	public static void moveOver(int[]array, int x, int z)
+	public static void moveOver(int[][]array, int x, int z)
 	{
-		int nextNum= array[x];
+		int[] nextNum= array[x];
 		for(int y=x; y<z; y++)
 		{
-			int dummy = array[y+1];
+			int[] dummy = array[y+1];
 			array[y+1]= nextNum;
 			nextNum = dummy;
 		}
 	}
-	public static  int containsString(String[] list1, String value)
+	
+	/*
+	 * Contains Comparable
+	 * Returns index of the indicated Comparable object in the list of Comparables.
+	 * @param Comparable[] list1
+	 * @param Comparable query
+	 * @return index of the query in the list but returns -1 if it is not found in that list.
+	 */
+	public static  int containsComparable(Comparable[] list1, Comparable query)
 	{
 		for(int i=0; i<list1.length; i++)
 		{
-			if(list1[i]==value)
+			if(list1[i]==query)
 				return i;
 		}
 		return -1;
 		
     }
-	
-	public static  int containsComparable(Comparable[] list1, Comparable value)
-	{
-		for(int i=0; i<list1.length; i++)
-		{
-			if(list1[i]==value)
-				return i;
-		}
-		return -1;
-		
-    }
-	
-	/*
-	 * Bubble Sort (Strings)
-	 * Sorts an array of Strings by swapping adjacent numbers when needed until there is no more
-	 * swaps needed.
-	 * @param String[] list1
-	 * @return void
-	 */
-	public static void bubbleSort(String[] list1)
-	{
-		boolean swapZero = false;
-		while(!swapZero)
-		{
-			int numSwap=0;
-			for(int i=0; i<list1.length-1; i++)
-			{
-				
-				if((list1[i].compareToIgnoreCase(list1[i+1]))>0)
-				{
-					String dummy= list1[i];
-					list1[i]=list1[i+1];
-					list1[i+1]=dummy;
-					numSwap++;
-					
-				}
-			}
-			if(numSwap==0)
-			{
-				swapZero=true;
-			}
-		}
-	}
-	
-	/*
-	 * Bubble Sort (Strings)
-	 * Sorts an array of Strings by swapping adjacent numbers when needed until there is no more
-	 * swaps needed.
-	 * @param String[] list1
-	 * @return void
-	 */
-	public static void bubbleSortComp(Comparable[] list1)
-	{
-		boolean swapZero = false;
-		while(!swapZero)
-		{
-			int numSwap=0;
-			for(int i=0; i<list1.length-1; i++)
-			{
-				
-				if((list1[i].compareTo(list1[i+1]))>0)
-				{
-					Comparable dummy= list1[i];
-					list1[i]=list1[i+1];
-					list1[i+1]=dummy;
-					numSwap++;
-					
-				}
-			}
-			if(numSwap==0)
-			{
-				swapZero=true;
-			}
-		}
-	}
 
-	/*
-	 * Partition method
-	 * Chooses a pivot and moves all the integers greater than it on the right side of it and the integers less than it on the left side.
-	 * @param int[] list1
-	 * @param int front
-	 * @param int back
-	 * @return integer of the position of the array.
-	 */
-	public static int partition(Comparable[] list1, int front, int back)
-	{
-		int positionPivot = front;
-		int frontIndex = front+1;
-		int backIndex = back;
-		boolean searchingBack = true;
-		boolean searchingFront = false;
-		while(backIndex>frontIndex)
-		{
-			if (list1[positionPivot].compareTo(list1[backIndex])>0 && searchingBack)
-			{
-				int j = 0;
-				j = positionPivot;
-				positionPivot = backIndex;
-				swapMethod(list1, j, positionPivot);
-				
-				frontIndex= j+1;
-				searchingBack = false;
-				searchingFront = true;
-			}
-			else if (searchingBack && list1[positionPivot].compareTo(list1[backIndex])<0)
-			{
-				backIndex--;
-			}
-			if (list1[frontIndex].compareTo(list1[positionPivot])>0 && searchingFront)
-			{
-				int j = 0;
-				j = positionPivot;
-				positionPivot = frontIndex;
-				swapMethod(list1, j, positionPivot);
-			
-				backIndex = j-1;
-				searchingBack=true;
-				searchingFront=false;
-			}
-			else if (searchingFront && list1[frontIndex].compareTo(list1[positionPivot])<0)
-			{
-				frontIndex++;
-			}
-			
-		}
-		return positionPivot;
-	}
 	
-	/*
-	 * Swap Method
-	 * Swaps two integers in a array of integers given their indexes.
-	 * @param int[] list
-	 * @param int pivotIndex
-	 * @param int index
-	 * @return void
-	 */
-	public static void swapMethod (Comparable[] list, int pivotIndex, int index)
-	{
-		Comparable dummy = list[index];
-		list[index] = list[pivotIndex];
-		list[pivotIndex] = dummy;
-	}
-	
-	/*
-	 * Quick Sort
-	 * Recursively uses partition to sort an array of integers.
-	 * @param int[] list1
-	 * @param int front
-	 * @param int back
-	 * @return void
-	 */
-	public static void quickSort(Comparable[] list1, int front, int back)
-	{
-		if (front<back)
-		{
-			int positionPivot = partition(list1,front,back);
-			quickSort(list1,front,positionPivot);
-			quickSort(list1,positionPivot+1,list1.length-1);
-			
-		}
+	public String greeting() {
+		
+		return null;
 	}
 }
