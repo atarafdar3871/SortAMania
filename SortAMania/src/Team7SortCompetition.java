@@ -236,6 +236,6 @@ public class Team7SortCompetition extends SortCompetition
 	@Override
 	public String greeting() {
 		// TODO Auto-generated method stub
-		return "Never forget greetings; they are important.";
+		return "Never forget greetings; they are important. Programmers were Ahnaf Zitou, Jason Zhang, and Sidney Phillips";
 	}
 }
