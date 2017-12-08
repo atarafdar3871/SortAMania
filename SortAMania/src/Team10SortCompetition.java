@@ -485,6 +485,6 @@ public class Team10SortCompetition extends SortCompetition{
 	
 	public String greeting() {
 		
-		return null;
+		return "Hi... Welcome to Jefferson C. Bernard and Muhammad Usman's (Team 10) SortAMania entry!";
 	}
 }
