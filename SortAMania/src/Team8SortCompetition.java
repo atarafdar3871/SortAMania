@@ -204,9 +204,13 @@ public class Team8SortCompetition extends SortCompetition {
 
 	/**
 	 * swap two objects in an array
-	 * @param list the list to be swapped
-	 * @param i the index to swap to j
-	 * @param j the index to swap to i
+	 * 
+	 * @param list
+	 *            the list to be swapped
+	 * @param i
+	 *            the index to swap to j
+	 * @param j
+	 *            the index to swap to i
 	 */
 	private void swap(Object[] list, int i, int j) {
 		Object temp = list[i];
@@ -216,9 +220,13 @@ public class Team8SortCompetition extends SortCompetition {
 
 	/**
 	 * partition an array
-	 * @param arr the array
-	 * @param low the start index
-	 * @param high the end index
+	 * 
+	 * @param arr
+	 *            the array
+	 * @param low
+	 *            the start index
+	 * @param high
+	 *            the end index
 	 * @return
 	 */
 	private int partition(Comparable[] arr, int lo, int hi) {
@@ -237,9 +245,13 @@ public class Team8SortCompetition extends SortCompetition {
 
 	/**
 	 * implementation of quicksort
-	 * @param arr the array
-	 * @param i the start index
-	 * @param j  the end index
+	 * 
+	 * @param arr
+	 *            the array
+	 * @param i
+	 *            the start index
+	 * @param j
+	 *            the end index
 	 */
 	private void quickSort(Comparable[] arr, int i, int j) {
 		while (i < j) {
@@ -248,16 +260,19 @@ public class Team8SortCompetition extends SortCompetition {
 				quickSort(arr, i, p - 1); // quicksort the left
 				i = p + 1; // iterative quicksort the right
 			} else {
-				quickSort(arr, p + 1, j); //quicksort the right
-				j = p - 1; //iterative quicksort the left
+				quickSort(arr, p + 1, j); // quicksort the right
+				j = p - 1; // iterative quicksort the left
 			}
 		}
 	}
 
 	/**
 	 * implentation of binary search
-	 * @param arr the array
-	 * @param obj the obj to search
+	 * 
+	 * @param arr
+	 *            the array
+	 * @param obj
+	 *            the obj to search
 	 * @return the index of obj
 	 */
 	private int binarySearch(Comparable[] arr, Comparable obj) {
@@ -279,8 +294,11 @@ public class Team8SortCompetition extends SortCompetition {
 
 	/**
 	 * implementation of parallel quicksort
-	 * @param arr the array
-	 * @param query the string to be searched
+	 * 
+	 * @param arr
+	 *            the array
+	 * @param query
+	 *            the string to be searched
 	 * @returns the index of the string
 	 */
 	@Override
@@ -288,7 +306,7 @@ public class Team8SortCompetition extends SortCompetition {
 		int mid = arr.length / 2; // split array
 		ExecutorService executor = Executors.newFixedThreadPool(2); // two threads
 		CompletionService<Void> completionService = new ExecutorCompletionService<Void>(executor);
-		//first half
+		// first half
 		Callable<Void> c = new Callable<Void>() {
 			@Override
 			public Void call() {
@@ -296,7 +314,7 @@ public class Team8SortCompetition extends SortCompetition {
 				return null;
 			}
 		};
-		//second half
+		// second half
 		Callable<Void> c1 = new Callable<Void>() {
 			@Override
 			public Void call() {
