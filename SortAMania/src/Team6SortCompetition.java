@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Team6SortCompetition extends SortCompetition{
 	
 //Start challengeOne
@@ -39,28 +41,27 @@ public class Team6SortCompetition extends SortCompetition{
 	
 	
 //Start challengeTwo
-	public static void fastCmpSwap(String[] arr, int a, int b) {
-		if(arr[a].compareTo(arr[b])>0) {
-			String t = arr[a];
-			arr[a] = arr[b];
-			arr[b] = t;
-		}
+	public static void swap(String[] list, int pos1, int pos2) {
+		String tempVar = list[pos1];
+		list[pos1] = list[pos2];
+		list[pos2] = tempVar;
 	}
 	
-	public static void sortNetwork(String[] arr) {
-		fastCmpSwap(arr, 0, 1);
-		fastCmpSwap(arr, 3, 4);
-		fastCmpSwap(arr, 2, 4);
-		fastCmpSwap(arr, 2, 3);
-		fastCmpSwap(arr, 0, 3);
-		fastCmpSwap(arr, 0, 2);
-		fastCmpSwap(arr, 1, 4);
-		fastCmpSwap(arr, 1, 3);
-		fastCmpSwap(arr, 1, 2);
+	public static void insertionSort(String[] list1) {
+		for (int i = 1; i < list1.length; i++) {
+			int j = i-1;
+			int k = i;
+			while (j != -1 && list1[k].compareTo(list1[j]) < 0) {
+				swap(list1, k, j);
+				j--;
+				k--;
+			}
+		}
+		System.out.println(Arrays.toString(list1));
 	}
 	
 	public int challengeTwo(String[] arr, String query) {
-		sortNetwork(arr);
+		insertionSort(arr);
 		for(int i = 0; i<arr.length; i++) {
 			if(arr[i].equals(query)) return i;
 		}
@@ -89,7 +90,7 @@ public class Team6SortCompetition extends SortCompetition{
 
 //Start challengeFour
 	public int challengeFour(int[][] arr) {
-		int[] medianArray = new int[5];
+		int[] medianArray = new int[arr.length];
 		for(int i = 0; i<arr.length; i++) {
 			medianArray[i] = sortAndFindMedian(arr[i]);
 			System.out.print(medianArray[i] + " ");
