@@ -81,11 +81,13 @@ public class SortUtilities {
 		{
 			if (times[i] > mean + (2*stdDev))
 			{
-				times[i] = mean;
+				System.out.println("removing" + times[i]);
+				times[i] = Double.NaN;
 			}
 			if (times[i] < mean - (2*stdDev))
-			{
-				times[i] = mean;
+			{				
+				System.out.println("removing" + times[i]);
+				times[i] = Double.NaN;
 			}
 		}
 		sum  = average(times);
@@ -98,7 +100,11 @@ public class SortUtilities {
 		double sum = 0;
 		for (double x : times)
 		{
-			sum += x;
+			if (x != Double.NaN)
+			{
+				sum += x;
+			}
+
 		}
 		return sum/times.length;
 	}
