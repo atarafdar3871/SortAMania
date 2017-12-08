@@ -10,7 +10,7 @@ public class Team13SortCompetition extends SortCompetition
 {
 	public static void main(String[] args)
 	{
-		Team13SortCompetition test= new Team13SortCompetition();
+		/*Team13SortCompetition test= new Team13SortCompetition();
 		long startTime;
 		long endTime;
 		long totalTime;
@@ -29,11 +29,11 @@ public class Team13SortCompetition extends SortCompetition
 			count++;
 		}
 		avgTime=sumTime/10;
-		System.out.println(avgTime);
+		System.out.println(avgTime);*/
 	}
 	public int challengeOne(int[] arr)
 	{
-		radixSort(arr,1);
+		radixSort(arr);
 		return getMedian(arr);
 	}
 	//insertion sort
@@ -232,58 +232,54 @@ public class Team13SortCompetition extends SortCompetition
 	{
 		return "Hello, this is team 13's sort class.";
 	}
-	static int getMax(int arr[], int n)
+	public static int findMax(int arr[])
     {
-        int mx = arr[0];
-        for (int i = 1; i < n; i++)
-            if (arr[i] > mx)
-                mx = arr[i];
-        return mx;
-    }
- 
-    // A function to do counting sort of arr[] according to
-    // the digit represented by exp.
-    static void countSort(int arr[], int n, int exp)
-    {
-        int output[] = new int[n]; // output array
-        int i;
-        int count[] = new int[10];
-        Arrays.fill(count,0);
- 
-        // Store count of occurrences in count[]
-        for (i = 0; i < n; i++)
-            count[ (arr[i]/exp)%10 ]++;
- 
-        // Change count[i] so that count[i] now contains
-        // actual position of this digit in output[]
-        for (i = 1; i < 10; i++)
-            count[i] += count[i - 1];
- 
-        // Build the output array
-        for (i = n - 1; i >= 0; i--)
+        int max=arr[0];
+        for (int i=1;i<arr.length;i++)
         {
-            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i];
-            count[ (arr[i]/exp)%10 ]--;
+            if (arr[i] > max)
+            {
+                max = arr[i];
+            }
         }
- 
-        // Copy the output array to arr[], so that arr[] now
-        // contains sorted numbers according to curent digit
-        for (i = 0; i < n; i++)
-            arr[i] = output[i];
+        return max;
     }
- 
-    // The main function to that sorts arr[] of size n using
-    // Radix Sort
-    static void radixSort(int arr[], int n)
+	//count sort for radix
+	public static void countSortRadix(int[] arr, int max, int pow)
+	{
+		int[] count = new int[max+1];
+		int sums=0;
+		int[] output=new int[arr.length];
+		Arrays.fill(count,0);
+		for(int x=0;x<arr.length;x++)
+		{
+			count[(arr[x]/pow)%10]+=1;
+		}
+		sums=count[0];
+		for(int y=1;y<count.length;y++)
+		{
+			sums+=count[y];
+			count[y]=sums;
+		}
+		for(int z=arr.length-1;z>-1;z--)
+		{
+			int num=(arr[z]/pow)%10;
+			count[num]=count[num]-1;
+			output[count[num]]=arr[z];
+		}
+		for(int q=0;q<arr.length;q++)
+		{
+			arr[q]=output[q];
+		}
+	}
+	//radix sort
+	public static void radixSort(int arr[])
     {
-        // Find the maximum number to know number of digits
-        int m = getMax(arr, n);
- 
-        // Do counting sort for every digit. Note that instead
-        // of passing digit number, exp is passed. exp is 10^i
-        // where i is current digit number
-        for (int exp = 1; m/exp > 0; exp *= 10)
-            countSort(arr, n, exp);
+        int max = findMax(arr);
+        for (int pow=1;max/pow>0;pow*=10)
+        {
+            countSortRadix(arr, max, pow);
+        }
     }
     private static int getRandomInteger(int low, int high)
 	{
@@ -322,5 +318,12 @@ public class Team13SortCompetition extends SortCompetition
         }
         return randomArray;
     }
-    
+	private static void printArr(int[] list)
+	{
+		for(int h:list)
+		{
+			System.out.print("["+h+"] ");
+		}
+		System.out.println();
+	}
 }
