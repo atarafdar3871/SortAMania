@@ -51,8 +51,7 @@ public class Team8SortCompetition extends SortCompetition {
 				count[i + 1] += count[i];
 			for (int i = 0; i < len; i++) // fill temp array
 				temp[count[a[i].charAt(l)]++] = a[i];
-			for (int i = 0; i < len; i++) // replace current array
-				a[i] = temp[i];
+			System.arraycopy(temp, 0, a, 0, 10000); // copy back
 		}
 		return binarySearch(a, query);
 	}
@@ -104,7 +103,7 @@ public class Team8SortCompetition extends SortCompetition {
 			}
 		}
 
-		return (medians[499] + medians[500]) >> 1;
+		return (arr[499][499] + arr[499][500]) >> 1;
 	}
 
 	private void countingSort(int[] a) {
