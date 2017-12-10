@@ -103,7 +103,7 @@ public class Team8SortCompetition extends SortCompetition {
 			}
 		}
 
-		return (medians[499] + medians[500]) >> 1;
+		return (arr[499][499] + arr[499][500]) >> 1;
 	}
 
 	private void countingSort(int[] a) {
