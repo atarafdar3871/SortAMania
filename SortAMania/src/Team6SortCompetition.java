@@ -122,7 +122,9 @@ public class Team6SortCompetition extends SortCompetition{
 //Start challengeFive
 	public int challengeFive(Comparable[] arr, Comparable query) {
 		for(int i = 0; i<arr.length; i++) {
-			if(arr[i].equals(query)) return i;
+			if (arr[i].compareTo(query)==0) {
+				return i;
+			}
 		}
 		return -1;
 	}
